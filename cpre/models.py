@@ -1,27 +1,23 @@
 from django.db import models
 
-# Create your models here.
 class Categoria(models.Model):
     descricao = models.CharField(max_length=40)
-    
+
     def __str__(self):
         return self.descricao
 
     class Meta:
         verbose_name_plural = "Categorias"
 
-   
 class Produto(models.Model):
     nome = models.CharField(max_length=100)
     preco = models.DecimalField(max_digits=10, decimal_places=2)
     descricao = models.TextField()
-    categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT)
-    
+    categorias = models.ManyToManyField(Categoria)
+    imagem = models.ImageField(upload_to='produtos/', null=True, blank=True)
+
     def __str__(self):
-        return f"{self.nome} ({self.preco}) ({self.descricao}) ({self.categoria})"
-
-
-
+        return f"{self.nome} ({self.preco}) ({self.descricao}) ({', '.join(str(categoria) for categoria in self.categorias.all())})"
 
     
 #class Pais(models.Model):
