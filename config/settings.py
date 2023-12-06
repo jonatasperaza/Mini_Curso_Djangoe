@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cpre',
+    'rest_framework',
+    'rest_framework_api_key',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -119,6 +123,29 @@ USE_TZ = True
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / "media"
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_api_key.authentication.DRFApiKeyAuthentication',
+    ],
+}
+
+# Configurações opcionais para o djangorestframework-api-key
+DJANGO_REST_FRAMEWORK_API_KEY = {
+    'DEFAULTS': {
+        'DIGEST': True,  # Use digests em vez de chaves brutas
+        'HIDE_APIKEY_HEADER': True,  # Não incluir a chave no cabeçalho da resposta
+    },
+    'AUTH_HEADER_TYPES': (
+        'Api-Key',
+        'Bearer',
+    ),
+}
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # Adicione a origem do seu frontend
+]
+
 
 
 
