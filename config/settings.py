@@ -71,6 +71,16 @@ TEMPLATES = [
         },
     },
 ]
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework_api_key.permissions.HasAPIKey",
+    ]
+}
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # Adicione a origem do seu frontend
+]
+
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -131,21 +141,6 @@ REST_FRAMEWORK = {
 }
 
 # Configurações opcionais para o djangorestframework-api-key
-DJANGO_REST_FRAMEWORK_API_KEY = {
-    'DEFAULTS': {
-        'DIGEST': True,  # Use digests em vez de chaves brutas
-        'HIDE_APIKEY_HEADER': True,  # Não incluir a chave no cabeçalho da resposta
-    },
-    'AUTH_HEADER_TYPES': (
-        'Api-Key',
-        'Bearer',
-    ),
-}
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Adicione a origem do seu frontend
-]
-
 
 
 

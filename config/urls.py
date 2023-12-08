@@ -15,13 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
-from cpre.views import ProdutoListView 
+from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/produtos/', ProdutoListView.as_view(), name='produto-list'),##ao retirar essa linha o programa volta a funcionar porem sem api
-
-    # ... outras URLs globais do projeto ...
+    path('api-token-auth/', view.obtain_auth_token, name='api-token-auth')
 ]
 
